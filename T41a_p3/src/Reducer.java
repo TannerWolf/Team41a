@@ -45,6 +45,7 @@ public class Reducer {
 		File[] files = dir.listFiles();
 		Arrays.sort(files);
 
+		@SuppressWarnings("unused")
 		Record r = null;
 
 		// list of files for stocking the PQ
@@ -69,6 +70,24 @@ public class Reducer {
 			System.exit(1);
 		}
 
-		// TODO
+		// TODO: implement algorithm
+		// These are my comments for the skeleton of the algorithm
+		// Take one entry from each input file and insert into queue
+		
+		// Remove min entry e from queue and merge with r
+		
+		// While queue !isEmpty()
+			// e = removeMin()
+			// compare to key associated with r
+				// if (same)
+					// merge e with r
+				// else 
+					// write r to output
+					// clear r
+					// merge e with r
+				// either way, take next entry e' from same file as e
+				// insert into queue
+		// write r to outpur file
+		
     }
 }

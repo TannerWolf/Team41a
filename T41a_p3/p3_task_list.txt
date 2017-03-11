@@ -1,0 +1,28 @@
+--Task 1: Try to understand what the hell is going on
+	- Make map of how classes interact, which stores what
+
+-Task 2: Fill out FileLinePriorityQueue
+	- 
+
+-Task 3: Fill out ThesaurusRecord
+
+-Task 4: Fill out WeatherRecord
+
+-Task 5: check
+	- check  output files to match given
+	- errors and bugs
+	- corner cases
+	- slim down code, more efficient
+
+-Task 6: Comments
+	- methods
+	- class descriptions
+	- headers
+
+-Task 7: finish this file
+
+-Task 8: turn in
+	FileLinePriorityQueue.java
+	Reducer.java
+	ThesaurusRecord.java
+	WeatherRecord.java
