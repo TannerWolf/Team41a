@@ -1,1 +1,0 @@
-INDEX VERSION 1.129+C:\Users\Tanner\Documents\Programming\CS Workspace\CS 367\.metadata\.plugins\org.eclipse.jdt.core
