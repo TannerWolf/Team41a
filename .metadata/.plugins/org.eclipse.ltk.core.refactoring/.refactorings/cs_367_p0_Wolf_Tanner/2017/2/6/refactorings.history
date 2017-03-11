@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 2 elements to &apos;p1_Tanner_Wolf/src/(default package)&apos;&#x0D;&#x0A;- Original project: &apos;cs_367_p0_Wolf_Tanner&apos;&#x0D;&#x0A;- Destination element: &apos;p1_Tanner_Wolf/src/(default package)&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     ScoreList.java&#x0D;&#x0A;     Score.java&#x0D;&#x0A;- Update references to refactored element" description="Move compilation units" destination="=p1_Tanner_Wolf/src&lt;" element1="/src&lt;{ScoreList.java" element2="/src&lt;{Score.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1486852817828" units="2" version="1.0"/>
+</session>

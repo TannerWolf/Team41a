@@ -1,0 +1,6 @@
+import java.util.*;
+
+public class JobListIterator<E> implements Iterator<E> {
+
+	
+}
