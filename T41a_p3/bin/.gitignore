@@ -1,3 +1,13 @@
-/p3_input/
-/thesaurus_data/
-/weather_data/
+/FileIterator.class
+/FileLine.class
+/FileLinePriorityQueue.class
+/MinPriorityQueueADT.class
+/PriorityQueueEmptyException.class
+/PriorityQueueFullException.class
+/Record.class
+/Reducer.class
+/SortExample.class
+/ThesaurusRecord$ThesaurusLineComparator.class
+/ThesaurusRecord.class
+/WeatherRecord$WeatherLineComparator.class
+/WeatherRecord.class
