@@ -72,8 +72,6 @@ public class Reducer {
 			System.exit(1);
 		}
 
-		// TODO: write to output
-
 		// Create queue
 		MinPriorityQueueADT<FileLine> fQ = new FileLinePriorityQueue(fileList.size(), r.getComparator());
 
@@ -99,7 +97,6 @@ public class Reducer {
 					// merge e with r
 					r.join(e);
 				} else {
-					
 					// write r to output
 					writer.println(r);
 					// clear r
@@ -116,9 +113,9 @@ public class Reducer {
 					fQ.insert(e);
 				}
 			}
-			// write r to output file
+			// write r to output file for last key
 			writer.println(r);
-			
+			// flush and close writer
 			writer.flush();
 			writer.close();
 

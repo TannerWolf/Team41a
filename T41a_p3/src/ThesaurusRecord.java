@@ -61,6 +61,7 @@ public class ThesaurusRecord extends Record{
     	if (w == null) {
     		System.out.println("Error: null string given to join");
     	}
+    	key = w.getString().split(":")[0];
     	String[] syns = w.getString().split(":")[1].split(",");
     	// Go through each synonym string in input FileLine
     	for (int i = 0; i < syns.length; i++) {
