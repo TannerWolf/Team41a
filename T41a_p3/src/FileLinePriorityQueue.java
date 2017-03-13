@@ -38,17 +38,18 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		            }
 		}
 */
-		return null;
+		return a[--numItems];
     }
 
     public void insert(FileLine fl) throws PriorityQueueFullException {
-		if (fl == null)
+		if (numItems == maxSize)
 			throw new PriorityQueueFullException();
-		else
-			numItems++;
 	    a[numItems] = fl;
 		boolean done = false;
-		int child =numItems;
+		int child = numItems;
+		if (child == 1) {
+			done = true;
+		}
 		while (!done){
 			int parent = child/2;
 			
@@ -65,6 +66,7 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 
 			}
 		}
+		numItems++;
     }
 
     public boolean isEmpty() {

@@ -72,7 +72,7 @@ public class Reducer {
 			System.exit(1);
 		}
 
-		// TODO: implement algorithm
+		// TODO: write to output
 
 		// Create queue
 		MinPriorityQueueADT<FileLine> fQ = new FileLinePriorityQueue(fileList.size(), r.getComparator());
@@ -82,6 +82,12 @@ public class Reducer {
 			for (FileIterator fI : fileList) {
 				fQ.insert(fI.next());
 			}
+			
+			// Create output file and writer
+			File f = new File(outFile);
+			PrintWriter writer;
+			writer = new PrintWriter( new BufferedWriter( new FileWriter(f)));
+			
 			// Remove min entry e from queue and merge with r
 			r.join(fQ.removeMin());
 			// While queue !isEmpty()
@@ -95,7 +101,7 @@ public class Reducer {
 				} else {
 					
 					// write r to output
-					System.out.println(r);
+					writer.println(r);
 					// clear r
 					r.clear();
 					// merge e with r
@@ -111,12 +117,17 @@ public class Reducer {
 				}
 			}
 			// write r to output file
-			System.out.println(r);
+			writer.println(r);
+			
+			writer.flush();
+			writer.close();
 
 		} catch (PriorityQueueFullException e) {
 			System.out.println("Error: Queue already full");
 		} catch (PriorityQueueEmptyException e) {
 			System.out.println("Error: Queue contains no FileLines");
+		} catch (IOException e) {
+			System.out.println("Error creating output file");
 		}
 
 	}
