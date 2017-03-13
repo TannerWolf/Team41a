@@ -12,7 +12,6 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     // Max size of structure
     private int maxSize;
     // Array for queue structure
-    private FileLine[] fArray;
 
     /**
      * Initialize global variables
@@ -25,7 +24,6 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		maxSize = initialSize;
 		
 		// TODO
-		fArray = new FileLine[maxSize];
     }
 
     /**

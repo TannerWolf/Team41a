@@ -7,8 +7,8 @@ import java.util.Comparator;
  */
 
 public class ThesaurusRecord extends Record{
-	String key;
-	ArrayList<String> list;
+	private String key;
+	private ArrayList<String> list;
 
 	/**
 	 * Constructs a new ThesaurusRecord by passing the parameter to the parent constructor
@@ -58,6 +58,9 @@ public class ThesaurusRecord extends Record{
 	 * which are not already found in this ThesaurusRecord's list of synonyms.
 	 */
     public void join(FileLine w) {
+    	if (w == null) {
+    		System.out.println("Error: null string given to join");
+    	}
     	String[] syns = w.getString().split(":")[1].split(",");
     	// Go through each synonym string in input FileLine
     	for (int i = 0; i < syns.length; i++) {
@@ -88,4 +91,6 @@ public class ThesaurusRecord extends Record{
     	}
 		return out;
 	}
+    
+    
 }
