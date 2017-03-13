@@ -7,52 +7,68 @@ import java.util.Comparator;
  */
 public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     // TODO
-	//
     private Comparator<FileLine> cmp;
-    // Max size of structure
     private int maxSize;
-    // Array for queue structure
+    private int numItems;
+    FileLine a[];
 
-    /**
-     * Initialize global variables
-     * 
-     * @param initialSize
-     * @param cmp
-     */
     public FileLinePriorityQueue(int initialSize, Comparator<FileLine> cmp) {
 		this.cmp = cmp;
 		maxSize = initialSize;
+		a = new FileLine[maxSize];
+		numItems = 0;
 		
-		// TODO
     }
 
-    /**
-     * Removes the minimum element from the Priority Queue, and returns it.
-     *
-     * @return the minimum element in the queue, according to the compareTo()
-     * method of FileLine.
-     * @throws PriorityQueueEmptyException if the priority queue has no elements
-     * in it
-     */
     public FileLine removeMin() throws PriorityQueueEmptyException {
-		// TODO
-
+		boolean find = false;
+		/**int height = (int)(Math.log(numItems)/Math.log(2));
+		int j = 0;
+		
+		FileLine tmp;
+		while (!find){
+			 
+		        for (int i = numItems - 2 * height + j; i <= numItems; j++) {
+		        	int min = cmp.compare(a[i], a[i+1]);
+		        	if (min > 0) {
+		                
+		        }
+		            
+		                
+		            }
+		}
+*/
 		return null;
     }
 
-
-    /**
-     * Inserts a FileLine into the queue, making sure to keep the shape and
-     * order properties intact.
-     *
-     * @param fl the FileLine to insert
-     * @throws PriorityQueueFullException if the priority queue is full.
-     */
     public void insert(FileLine fl) throws PriorityQueueFullException {
-		// TODO
+		if (fl == null)
+			throw new PriorityQueueFullException();
+		else
+			numItems++;
+	    a[numItems] = fl;
+		boolean done = false;
+		int child =numItems;
+		while (!done){
+			int parent = child/2;
+			
+			int compare = cmp.compare(a[parent], a[child]);
+			if (parent == 0)
+				done = true;
+			else if (compare == 0)
+				done = true;
+			else if (compare < 0){
+				FileLine tmp = a[parent];
+				a[parent] = a[child];
+				a[child] = tmp;
+				done = true;
+
+			}
+		}
     }
 
     public boolean isEmpty() {
-		return maxSize <= 0;
+		// TODO
+		return true;
     }
 }
