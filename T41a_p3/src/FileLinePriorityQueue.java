@@ -7,22 +7,49 @@ import java.util.Comparator;
  */
 public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     // TODO
+	//
     private Comparator<FileLine> cmp;
+    // Max size of structure
     private int maxSize;
+    // Array for queue structure
+    private FileLine[] fArray;
 
+    /**
+     * Initialize global variables
+     * 
+     * @param initialSize
+     * @param cmp
+     */
     public FileLinePriorityQueue(int initialSize, Comparator<FileLine> cmp) {
 		this.cmp = cmp;
 		maxSize = initialSize;
 		
 		// TODO
+		fArray = new FileLine[maxSize];
     }
 
+    /**
+     * Removes the minimum element from the Priority Queue, and returns it.
+     *
+     * @return the minimum element in the queue, according to the compareTo()
+     * method of FileLine.
+     * @throws PriorityQueueEmptyException if the priority queue has no elements
+     * in it
+     */
     public FileLine removeMin() throws PriorityQueueEmptyException {
 		// TODO
 
 		return null;
     }
 
+
+    /**
+     * Inserts a FileLine into the queue, making sure to keep the shape and
+     * order properties intact.
+     *
+     * @param fl the FileLine to insert
+     * @throws PriorityQueueFullException if the priority queue is full.
+     */
     public void insert(FileLine fl) throws PriorityQueueFullException {
 		// TODO
     }

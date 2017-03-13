@@ -87,7 +87,8 @@ public class Reducer {
 					// merge e with r
 				// either way, take next entry e' from same file as e
 				// insert into queue
-		// write r to outpur file
+		// write r to output file
 		
+		System.out.println("END");
     }
 }
