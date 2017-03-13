@@ -68,7 +68,6 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     }
 
     public boolean isEmpty() {
-		// TODO
-		return true;
+		return numItems <= 0;
     }
 }
