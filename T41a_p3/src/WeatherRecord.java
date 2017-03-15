@@ -6,7 +6,10 @@ import java.util.Comparator;
  * l stores the weather readings, in the same order as the files from which they came are indexed.
  */
 public class WeatherRecord extends Record{
-    // TODO declare data structures required
+    private int numFiles;
+    private String stationID;
+    private String date;
+    private String[] conditions;
 
 	/**
 	 * Constructs a new WeatherRecord by passing the parameter to the parent constructor
@@ -14,6 +17,7 @@ public class WeatherRecord extends Record{
 	 */
     public WeatherRecord(int numFiles) {
 		super(numFiles);
+		this.numFiles = numFiles;
 		clear();
     }
 	
@@ -23,11 +27,17 @@ public class WeatherRecord extends Record{
 	 */
     private class WeatherLineComparator implements Comparator<FileLine> {
 		public int compare(FileLine l1, FileLine l2) {
-			// TODO implement compare() functionality
-			
-			return 0;
+			String k1 = l1.getString().split(",")[0];
+			String k2 = l2.getString().split(",")[0];
+			if(k1.compareTo(k2) == 0) {
+				k1 = l1.getString().split(",")[1];
+				k2 = l2.getString().split(",")[1];
+				return k1.compareTo(k2);
+			}
+			else {
+				return k1.compareTo(k2);
+			}
 		}
-		
 		public boolean equals(Object o) {
 			return this.equals(o);
 		}
@@ -46,7 +56,12 @@ public class WeatherRecord extends Record{
 	 * the readings with Double.MIN_VALUE
 	 */
     public void clear() {
-		// TODO initialize/reset data members
+		stationID = null;
+		date = null;
+		conditions = new String[numFiles];
+		for(int i=0; i<conditions.length; i++) {
+			conditions[i] = "-";
+		}
     }
 
 	/**
@@ -57,15 +72,25 @@ public class WeatherRecord extends Record{
 	 * WeatherRecord should be set to the station and date values which were similarly parsed.
 	 */
     public void join(FileLine li) {
-		// TODO implement join() functionality
+    	if (li == null) {
+    		System.out.println("Error: null string given to join");
+    	}
+    	stationID = li.getString().split(",")[0];
+    	date = li.getString().split(",")[1];
+    	String temp = li.getString().split(",")[2];
+        int conditionNum = li.getFileIterator().getIndex();
+        conditions[conditionNum] = temp;
     }
 	
 	/**
 	 * See the assignment description and example runs for the exact output format.
 	 */
     public String toString() {
-		// TODO
-		
-		return null;
+    	String out = stationID + "," + date + ",";
+    	for(int i=0; i<conditions.length; i++) {
+    		out += conditions[i] + ",";
+    	}
+		return out;
     }
 }
+
