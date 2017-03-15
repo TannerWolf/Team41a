@@ -47,7 +47,6 @@ public class Reducer {
 		File[] files = dir.listFiles();
 		Arrays.sort(files);
 
-		@SuppressWarnings("unused")
 		Record r = null;
 
 		// list of files for stocking the PQ
@@ -90,6 +89,7 @@ public class Reducer {
 			r.join(fQ.removeMin());
 			// While queue !isEmpty()
 			while (!fQ.isEmpty()) {
+				System.out.println("In loop");
 				FileLine e = fQ.removeMin();
 				// compare to key associated with r
 				String rKey = r.toString().split(":")[0];
@@ -113,6 +113,7 @@ public class Reducer {
 					fQ.insert(e);
 				}
 			}
+			System.out.println("outside loop");
 			// write r to output file for last key
 			writer.println(r);
 			// flush and close writer

@@ -24,7 +24,7 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     		throw new PriorityQueueEmptyException();
     	
 		FileLine temp = a[1];//save the minimum 
-		a[1] = a[numItems];//replace the first element in the array to the last one
+		a[1] = a[numItems-1];//replace the first element in the array to the last one
 		numItems--;
 		int i = 1;
 		int n = 0;
@@ -72,8 +72,8 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 				a[parent] = a[child];
 				a[child] = tmp;
 				done = true;
-
 			}
+			child = parent;
 		}
 		numItems++;
     }
