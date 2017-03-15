@@ -10,7 +10,7 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     private Comparator<FileLine> cmp;
     private int maxSize;
     private int numItems;
-    FileLine a[];
+    FileLine a[];//an array based heap of FileLine
 
     public FileLinePriorityQueue(int initialSize, Comparator<FileLine> cmp) {
 		this.cmp = cmp;
@@ -21,31 +21,40 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     }
 
     public FileLine removeMin() throws PriorityQueueEmptyException {
-		boolean find = false;
-		/**int height = (int)(Math.log(numItems)/Math.log(2));
-		int j = 0;
-		
-		FileLine tmp;
-		while (!find){
-			 
-		        for (int i = numItems - 2 * height + j; i <= numItems; j++) {
-		        	int min = cmp.compare(a[i], a[i+1]);
-		        	if (min > 0) {
-		                
-		        }
-		            
-		                
-		            }
+    	if (numItems == 0)//??not sure whether checking condition is right
+    		throw new PriorityQueueEmptyException();
+    	
+		FileLine temp = a[1];//save the minimum 
+		a[1] = a[numItems];//replace the first element in the array to the last one
+		numItems--;
+		int i = 1;
+		int n = 0;
+		while (n <= (int)(Math.log(numItems)/Math.log(2))){//do while the number of swape is not the
+			//same as height of the tree
+			int child = i*2;
+			int compare = cmp.compare(a[child+1], a[child]);//compare left child and right
+			if (compare < 0 ){
+				child += 1;//pick the right while right is smaller
+			a[i] = a[child];
+			i = child;	
+			}
+			else if(compare > 0){
+				a[i] = a[child];
+				i = child;
+			}
+			n++;
 		}
-*/
-		return a[--numItems];
+			
+		
+		return temp;
     }
 
     public void insert(FileLine fl) throws PriorityQueueFullException {
 		if (numItems == maxSize)
-			throw new PriorityQueueFullException();
-	    a[numItems] = fl;
-		boolean done = false;
+			throw new PriorityQueueFullException();//Throw exception if the priority queue
+		//is full
+	    a[numItems] = fl;//save FileLine to the array
+		boolean done = false;//decide whether the FileLine are saved in decremental order
 		int child = numItems;
 		if (child == 1) {
 			done = true;
@@ -56,9 +65,10 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 			int compare = cmp.compare(a[parent], a[child]);
 			if (parent == 0)
 				done = true;
-			else if (compare == 0)
+			//Check to see whether parents are smaller than child, if not swap the order
+			else if (compare < 0)
 				done = true;
-			else if (compare < 0){
+			else if (compare > 0){
 				FileLine tmp = a[parent];
 				a[parent] = a[child];
 				a[child] = tmp;
