@@ -6,7 +6,6 @@ import java.util.Comparator;
  *
  */
 public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
-    // TODO
     private Comparator<FileLine> cmp;
     private int maxSize;
     private int numItems;
