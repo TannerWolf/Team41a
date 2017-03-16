@@ -1,3 +1,14 @@
+/////////////////////////////////////////////////////////////////////////////
+// Semester:         CS367 Spring 2017
+// PROJECT:          p3
+// FILE:             ThesaurusRecord
+//
+// TEAM:    Team 41a
+// Authors: 
+// Author1: (Jiayue Lai, jlai28@wisc.edu, jlai, Lec 002)
+// Author2: (William Mustari, willmustari@gmail.com, mustari, Lec 002) 
+// Author3: (Tanner Wolf, tmwolf2@wisc.edu, tmwolf2, Lec 002) 
+///////////////////////////////////////////////////////////////////////////////
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

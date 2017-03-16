@@ -1,3 +1,14 @@
+/////////////////////////////////////////////////////////////////////////////
+// Semester:         CS367 Spring 2017
+// PROJECT:          p3
+// FILE:             ThesaurusRecord
+//
+// TEAM:    Team 41a
+// Authors: 
+// Author1: (Jiayue Lai, jlai28@wisc.edu, jlai, Lec 002)
+// Author2: (William Mustari, willmustari@gmail.com, mustari, Lec 002) 
+// Author3: (Tanner Wolf, tmwolf2@wisc.edu, tmwolf2, Lec 002) 
+///////////////////////////////////////////////////////////////////////////////
 import java.util.Comparator;
 
 /**
@@ -28,14 +39,17 @@ public class WeatherRecord extends Record{
 	 */
     private class WeatherLineComparator implements Comparator<FileLine> {
 		public int compare(FileLine l1, FileLine l2) {
+			//compare the stations associated with the given FileLines
 			String k1 = l1.getString().split(",")[0];
 			String k2 = l2.getString().split(",")[0];
+			//if stations are the same, compare the rest of data
 			if(k1.compareTo(k2) == 0) {
 				k1 = l1.getString().split(",")[1];
 				k2 = l2.getString().split(",")[1];
 			}
 			return k1.compareTo(k2);
 		}
+	
 		public boolean equals(Object o) {
 			return this.equals(o);
 		}
@@ -57,6 +71,8 @@ public class WeatherRecord extends Record{
 		stationID = null;
 		date = null;
 		conditions = new Double[numFiles];
+		// fill each entry in the data structure containing
+		 // the readings with Double.MIN_VALUE
 		for(int i=0; i<conditions.length; i++) {
 			conditions[i] = Double.MIN_VALUE;
 		}
@@ -100,4 +116,3 @@ public class WeatherRecord extends Record{
 		return out;
     }
 }
-

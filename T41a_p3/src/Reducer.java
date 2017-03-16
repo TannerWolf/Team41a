@@ -1,3 +1,14 @@
+/////////////////////////////////////////////////////////////////////////////
+// Semester:         CS367 Spring 2017
+// PROJECT:          p3
+// FILE:             Reducer
+//
+// TEAM:    Team 41a
+// Authors: 
+// Author1: (Jiayue Lai, jlai28@wisc.edu, jlai, Lec 002)
+// Author2: (William Mustari, willmustari@gmail.com, mustari, Lec 002) 
+// Author3: (Tanner Wolf, tmwolf2@wisc.edu, tmwolf2, Lec 002) 
+///////////////////////////////////////////////////////////////////////////////
 import java.io.*;
 import java.util.*;
 import java.lang.*;
@@ -64,7 +75,7 @@ public class Reducer {
 			r = new WeatherRecord(fileList.size());
 			break;
 		case "thesaurus":
-			r = new ThesaurusRecord(fileList.size());
+			r = new ThesaurusRecord (fileList.size());
 			break;
 		default:
 			System.out.println("Invalid type of data! " + type);
