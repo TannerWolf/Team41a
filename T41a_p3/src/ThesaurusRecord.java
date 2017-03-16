@@ -65,12 +65,8 @@ public class ThesaurusRecord extends Record{
     	String[] syns = w.getString().split(":")[1].split(",");
     	// Go through each synonym string in input FileLine
     	for (int i = 0; i < syns.length; i++) {
-    		boolean contains = false;
-    		if (list.contains(syns[i])) {
-    				contains = true;
-    			}
     		// If the list doens't contain the synonym already, add it to the list of synonyms
-    		if (!contains) {
+    		if (!list.contains(syns[i])) {
     			list.add(syns[i]);
     		}
     	}
@@ -82,14 +78,13 @@ public class ThesaurusRecord extends Record{
     public String toString() {
     	String out = key + ":";
     	Collections.sort(list);
-    	while (!list.isEmpty()) {
-    		out += list.remove(0);
-    		if (!list.isEmpty()) {
+    	for (int i = 0; i < list.size(); i++) {
+    		out += list.get(i);
+    		if (i < list.size() - 1) {
     			out += ",";
     		}
     	}
 		return out;
 	}
-    
     
 }

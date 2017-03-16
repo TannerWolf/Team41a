@@ -88,14 +88,24 @@ public class Reducer {
 			// Remove min entry e from queue and merge with r
 			r.join(fQ.removeMin());
 			
-			System.out.println("Initial record:\n" + r);
 			// While queue !isEmpty()
 			while (!fQ.isEmpty()) {
-				System.out.println("in loop");
 				FileLine e = fQ.removeMin();
 				// compare to key associated with r
-				String rKey = r.toString().split(":")[0];
-				if (rKey.equals(e.getString().split(":")[0])) {
+				String rKey = null;
+				String newKey = null;
+				if (type.equals("thesaurus")) {
+					rKey = r.toString().split(":")[0];
+					newKey = e.getString().split(":")[0];
+				}
+				else if (type.equals("weather")) {
+					String st[] = r.toString().split(",");
+					rKey = st[0] + "," + st[1];
+					st = e.getString().split(",");
+					newKey = st[0] + "," + st[1];
+				}
+				
+				if (rKey.equals(newKey)) {
 					System.out.println("keys equal");
 					// merge e with r
 					System.out.println("Join " + e.getString());

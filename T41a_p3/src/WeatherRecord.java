@@ -9,7 +9,7 @@ public class WeatherRecord extends Record{
     private int numFiles;
     private String stationID;
     private String date;
-    private Double[] conditions;
+    private String[] conditions;
 
 	/**
 	 * Constructs a new WeatherRecord by passing the parameter to the parent constructor
@@ -17,6 +17,8 @@ public class WeatherRecord extends Record{
 	 */
     public WeatherRecord(int numFiles) {
 		super(numFiles);
+		// call separately because super not working correctly
+		this.numFiles = numFiles;
 		clear();
     }
 	
@@ -31,11 +33,8 @@ public class WeatherRecord extends Record{
 			if(k1.compareTo(k2) == 0) {
 				k1 = l1.getString().split(",")[1];
 				k2 = l2.getString().split(",")[1];
-				return k1.compareTo(k2);
 			}
-			else {
-				return k1.compareTo(k2);
-			}
+			return k1.compareTo(k2);
 		}
 		public boolean equals(Object o) {
 			return this.equals(o);
@@ -57,9 +56,9 @@ public class WeatherRecord extends Record{
     public void clear() {
 		stationID = null;
 		date = null;
-		conditions = new Double[numFiles];
+		conditions = new String[numFiles];
 		for(int i=0; i<conditions.length; i++) {
-			conditions[i] = Double.MIN_VALUE;
+			conditions[i] = "-";
 		}
     }
 
@@ -75,11 +74,12 @@ public class WeatherRecord extends Record{
     	if (li == null) {
     		System.out.println("Error: null line given to join");
     	}
+    	System.out.println(li.getString());
     	stationID = li.getString().split(",")[0];
     	date = li.getString().split(",")[1];
     	String temp = li.getString().split(",")[2];
         int conditionNum = li.getFileIterator().getIndex();
-        conditions[conditionNum] = Double.parseDouble(temp);
+        conditions[conditionNum] = temp;
     }
 	
 	/**
