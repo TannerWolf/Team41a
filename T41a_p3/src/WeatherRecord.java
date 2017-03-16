@@ -9,7 +9,7 @@ public class WeatherRecord extends Record{
     private int numFiles;
     private String stationID;
     private String date;
-    private String[] conditions;
+    private Double[] conditions;
 
 	/**
 	 * Constructs a new WeatherRecord by passing the parameter to the parent constructor
@@ -56,9 +56,9 @@ public class WeatherRecord extends Record{
     public void clear() {
 		stationID = null;
 		date = null;
-		conditions = new String[numFiles];
+		conditions = new Double[numFiles];
 		for(int i=0; i<conditions.length; i++) {
-			conditions[i] = "-";
+			conditions[i] = Double.MIN_VALUE;
 		}
     }
 
@@ -70,16 +70,14 @@ public class WeatherRecord extends Record{
 	 * WeatherRecord should be set to the station and date values which were similarly parsed.
 	 */
     public void join(FileLine li) {
-    	System.out.println("in weather join");
     	if (li == null) {
     		System.out.println("Error: null line given to join");
     	}
-    	System.out.println(li.getString());
     	stationID = li.getString().split(",")[0];
     	date = li.getString().split(",")[1];
     	String temp = li.getString().split(",")[2];
         int conditionNum = li.getFileIterator().getIndex();
-        conditions[conditionNum] = temp;
+        conditions[conditionNum] = Double.parseDouble(temp);
     }
 	
 	/**
@@ -88,7 +86,16 @@ public class WeatherRecord extends Record{
     public String toString() {
     	String out = stationID + "," + date + ",";
     	for(int i=0; i<conditions.length; i++) {
-    		out += conditions[i] + ",";
+    		Double d = conditions[i];
+    		if (d == Double.MIN_VALUE) {
+    			out += "-";
+    		}
+    		else {
+    			out += d;
+    		}
+    		if (i < conditions.length-1) {
+    			out += ",";
+    		}
     	}
 		return out;
     }

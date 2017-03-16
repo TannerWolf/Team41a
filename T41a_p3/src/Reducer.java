@@ -115,19 +115,14 @@ public class Reducer {
 				}
 				
 				if (rKey.equals(newKey)) {
-					System.out.println("keys equal");
 					// merge e with r
-					System.out.println("Join " + e.getString());
 					r.join(e);
 				} else {
-					System.out.println("keys not equal");
 					// write r to output
 					writer.println(r);
 					// clear r
-					System.out.println("clear");
 					r.clear();
 					// merge e with r
-					System.out.println("join " + e.getString());
 					r.join(e);
 				}
 				// Get the FileIterator from e so that we get the next line from e's file
@@ -139,7 +134,6 @@ public class Reducer {
 					fQ.insert(e);
 				}
 			}
-			System.out.println("outside loop");
 			// write r to output file for last key
 			writer.println(r);
 			// flush and close writer

@@ -40,15 +40,20 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 				}
 			}
 			// Check if (smaller) child is smaller than parent
-			int compare = cmp.compare(a[parent], a[child]);
-			// if child is smaller, swap
-			if (compare > 0) {
-				FileLine temp = a[parent];
-				a[parent] = a[child];
-				a[child] = temp;
-				parent = child;
+			if (a[parent] != null && a[child] != null) {
+				int compare = cmp.compare(a[parent], a[child]);
+				// if child is smaller, swap
+				if (compare > 0) {
+					FileLine temp = a[parent];
+					a[parent] = a[child];
+					a[child] = temp;
+					parent = child;
+				}
+				// if parent larger than max child, done swapping
+				else {
+					return min;
+				}
 			}
-			// if parent larger than max child, done swapping
 			else {
 				return min;
 			}
