@@ -88,9 +88,10 @@ public class ThesaurusRecord extends Record{
 	 */
     public String toString() {
     	String out = key + ":";
-    	Collections.sort(list);
+    	Collections.sort(list);//writing the list in the sorted order
     	for (int i = 0; i < list.size(); i++) {
     		out += list.get(i);
+    		//Comma-separated list of synonyms
     		if (i < list.size() - 1) {
     			out += ",";
     		}

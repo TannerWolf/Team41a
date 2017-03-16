@@ -28,7 +28,7 @@ public class Reducer {
 			System.out.println("Usage: java Reducer <weather|thesaurus> <dir_name> <output_file>");
 			System.exit(1);
 		}
-
+        //read the parameter and run the program
 		String type = args[0];
 		String dirName = args[1];
 		String outFile = args[2];
@@ -69,7 +69,7 @@ public class Reducer {
 				fileList.add(new FileIterator(f.getAbsolutePath(), i));
 			}
 		}
-
+        //use different class when the input file are different
 		switch (type) {
 		case "weather":
 			r = new WeatherRecord(fileList.size());

@@ -42,7 +42,7 @@ public class WeatherRecord extends Record{
 			//compare the stations associated with the given FileLines
 			String k1 = l1.getString().split(",")[0];
 			String k2 = l2.getString().split(",")[0];
-			//if stations are the same, compare the rest of data
+			//if stations are the same, split the rest by comma, compare the rest of data
 			if(k1.compareTo(k2) == 0) {
 				k1 = l1.getString().split(",")[1];
 				k2 = l2.getString().split(",")[1];
@@ -68,6 +68,7 @@ public class WeatherRecord extends Record{
 	 * the readings with Double.MIN_VALUE
 	 */
     public void clear() {
+    	//set the variable to null to clear
 		stationID = null;
 		date = null;
 		conditions = new Double[numFiles];
@@ -86,13 +87,17 @@ public class WeatherRecord extends Record{
 	 * WeatherRecord should be set to the station and date values which were similarly parsed.
 	 */
     public void join(FileLine li) {
+    	//check whether the input fileline is null
     	if (li == null) {
     		System.out.println("Error: null line given to join");
     	}
+    	//Extract ID and date from input fileline
     	stationID = li.getString().split(",")[0];
     	date = li.getString().split(",")[1];
+    	//merge the specific part
     	String temp = li.getString().split(",")[2];
-        int conditionNum = li.getFileIterator().getIndex();
+        int conditionNum = li.getFileIterator().getIndex();//the entry with index equal to the parameter 
+   	 // FileLine's index should be set to the value of the reading
         conditions[conditionNum] = Double.parseDouble(temp);
     }
 	
@@ -103,12 +108,15 @@ public class WeatherRecord extends Record{
     	String out = stationID + "," + date + ",";
     	for(int i=0; i<conditions.length; i++) {
     		Double d = conditions[i];
+    		//if the number in the record is equal to the minimum
+    		//set to "-"
     		if (d == Double.MIN_VALUE) {
     			out += "-";
     		}
     		else {
     			out += d;
     		}
+    		//Comma-separated list of measurements
     		if (i < conditions.length-1) {
     			out += ",";
     		}

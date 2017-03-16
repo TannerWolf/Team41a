@@ -21,7 +21,11 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     private int maxSize;
     private int numItems;
     FileLine a[];//an array based heap of FileLine
-
+/**
+ * Construct for initializing the FileLinePriorityQueue class
+ * @param initialSize: the size of array based fileline
+ * @param cmp: comparator used to compare big/small of fileline
+ */
     public FileLinePriorityQueue(int initialSize, Comparator<FileLine> cmp) {
 		this.cmp = cmp;
 		maxSize = initialSize;
@@ -29,8 +33,13 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		numItems = 0;
 		
     }
-
+/**
+ * Remove the minimum of FileLine array through using the minHeap and 
+ * compare the left and right child of the element in the array. Throw the
+ * exception when the array is empty
+ */
     public FileLine removeMin() throws PriorityQueueEmptyException {
+
     	if (numItems == 0)
     		throw new PriorityQueueEmptyException();
     	
@@ -71,7 +80,11 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		}
 		return min;
     }
-
+/**
+ * Insert the FileLine in to the heap in minimum-based order. Throw
+ * Exception when the array is full or when the input FileLine is
+ * null
+ *  */
     public void insert(FileLine fl) throws PriorityQueueFullException {
     	//Throw exception if the priority queue is full
     	if (numItems == maxSize) {
@@ -105,7 +118,9 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 			}
 		}
     }
-
+/**
+ * Check to see whether the array is empty
+ */
     public boolean isEmpty() {
 		return numItems <= 0;
     }
