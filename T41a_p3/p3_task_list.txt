@@ -4,24 +4,26 @@
 -Task 2: Fill out FileLinePriorityQueue
 	- 
 
--Task 3: Fill out ThesaurusRecord
+-Task 3: Fill out Reducer
 
--Task 4: Fill out WeatherRecord
++T/WTask 4: Fill out ThesaurusRecord
 
--Task 5: check
++WTask 5: Fill out WeatherRecord
+
+-Task 6: check
 	- check  output files to match given
 	- errors and bugs
 	- corner cases
 	- slim down code, more efficient
 
--Task 6: Comments
+-Task 7: Comments
 	- methods
 	- class descriptions
 	- headers
 
--Task 7: finish this file
+-Task 8: finish this file
 
--Task 8: turn in
+-Task 9: turn in
 	FileLinePriorityQueue.java
 	Reducer.java
 	ThesaurusRecord.java
