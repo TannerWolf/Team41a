@@ -87,21 +87,28 @@ public class Reducer {
 			
 			// Remove min entry e from queue and merge with r
 			r.join(fQ.removeMin());
+			
+			System.out.println("Initial record:\n" + r);
 			// While queue !isEmpty()
 			while (!fQ.isEmpty()) {
-				System.out.println("In loop");
+				System.out.println("in loop");
 				FileLine e = fQ.removeMin();
 				// compare to key associated with r
 				String rKey = r.toString().split(":")[0];
 				if (rKey.equals(e.getString().split(":")[0])) {
+					System.out.println("keys equal");
 					// merge e with r
+					System.out.println("Join " + e.getString());
 					r.join(e);
 				} else {
+					System.out.println("keys not equal");
 					// write r to output
 					writer.println(r);
 					// clear r
+					System.out.println("clear");
 					r.clear();
 					// merge e with r
+					System.out.println("join " + e.getString());
 					r.join(e);
 				}
 				// Get the FileIterator from e so that we get the next line from e's file

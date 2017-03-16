@@ -14,68 +14,80 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     public FileLinePriorityQueue(int initialSize, Comparator<FileLine> cmp) {
 		this.cmp = cmp;
 		maxSize = initialSize;
-		a = new FileLine[maxSize];
+		a = new FileLine[maxSize + 1];
 		numItems = 0;
 		
     }
 
     public FileLine removeMin() throws PriorityQueueEmptyException {
-    	if (numItems == 0)//??not sure whether checking condition is right
+    	if (numItems == 0)
     		throw new PriorityQueueEmptyException();
     	
-		FileLine temp = a[1];//save the minimum 
-		a[1] = a[numItems-1];//replace the first element in the array to the last one
+		FileLine min = a[1];//save the minimum 
+		a[1] = a[numItems];//replace the first element in the array to the last one
+		a[numItems] = null;
 		numItems--;
-		int i = 1;
-		int n = 0;
-		while (n <= (int)(Math.log(numItems)/Math.log(2))){//do while the number of swape is not the
-			//same as height of the tree
-			int child = i*2;
-			int compare = cmp.compare(a[child+1], a[child]);//compare left child and right
-			if (compare < 0 ){
-				child += 1;//pick the right while right is smaller
-			a[i] = a[child];
-			i = child;	
-			}
-			else if(compare > 0){
-				a[i] = a[child];
-				i = child;
-			}
-			n++;
-		}
-			
 		
-		return temp;
+		// Reorder to maintain structure
+		int parent = 1;
+		// 
+		while (parent < numItems){
+			int child = parent*2;
+			if (a[child+1] != null) {
+				int compare = cmp.compare(a[child], a[child +1]);//compare left child and right
+				if (compare > 0 ){
+					child += 1;//pick the right while right is smaller
+				}
+			}
+			// Check if (smaller) child is smaller than parent
+			int compare = cmp.compare(a[parent], a[child]);
+			// if child is smaller, swap
+			if (compare > 0) {
+				FileLine temp = a[parent];
+				a[parent] = a[child];
+				a[child] = temp;
+				parent = child;
+			}
+			// if parent larger than max child, done swapping
+			else {
+				return min;
+			}
+		}
+		return min;
     }
 
     public void insert(FileLine fl) throws PriorityQueueFullException {
-		if (numItems == maxSize)
-			throw new PriorityQueueFullException();//Throw exception if the priority queue
-		//is full
+    	//Throw exception if the priority queue is full
+    	if (numItems == maxSize) {
+			throw new PriorityQueueFullException();
+    	}
+    	if (fl == null) {
+    		throw new IllegalArgumentException();
+    	}
+		numItems++;
 	    a[numItems] = fl;//save FileLine to the array
-		boolean done = false;//decide whether the FileLine are saved in decremental order
+		boolean done = false;//decide whether the heap is in order
 		int child = numItems;
-		if (child == 1) {
-			done = true;
-		}
 		while (!done){
 			int parent = child/2;
-			
-			int compare = cmp.compare(a[parent], a[child]);
-			if (parent == 0)
-				done = true;
-			//Check to see whether parents are smaller than child, if not swap the order
-			else if (compare < 0)
+			int compare = -1;
+			// If parent > 0, compare parent and child
+			if (parent > 0) {
+				compare = cmp.compare(a[parent], a[child]);
+			}
+			// If parent <= 0, or a[parent] < a[child], done with swapping
+			if (compare < 0)
 				done = true;
 			else if (compare > 0){
 				FileLine tmp = a[parent];
 				a[parent] = a[child];
 				a[child] = tmp;
+				child = parent;
+			}
+			else { // If the lines have the same key
 				done = true;
 			}
-			child = parent;
 		}
-		numItems++;
     }
 
     public boolean isEmpty() {

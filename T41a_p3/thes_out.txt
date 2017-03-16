@@ -1,6 +1,3 @@
-good:
 bad:
 good:
-bad:
-okay:fine
-
+okay:alright

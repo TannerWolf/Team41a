@@ -66,11 +66,9 @@ public class ThesaurusRecord extends Record{
     	// Go through each synonym string in input FileLine
     	for (int i = 0; i < syns.length; i++) {
     		boolean contains = false;
-    		for (String s : list) {
-    			if ( syns[i].equals(s) ) {
+    		if (list.contains(syns[i])) {
     				contains = true;
     			}
-    		}
     		// If the list doens't contain the synonym already, add it to the list of synonyms
     		if (!contains) {
     			list.add(syns[i]);
