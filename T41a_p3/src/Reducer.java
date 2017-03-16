@@ -86,11 +86,20 @@ public class Reducer {
 			writer = new PrintWriter( new BufferedWriter( new FileWriter(f)));
 			
 			// Remove min entry e from queue and merge with r
-			r.join(fQ.removeMin());
+			FileLine e = fQ.removeMin();
+			r.join(e);
+			// Get the FileIterator from e so that we get the next line from e's file
+			FileIterator itr = e.getFileIterator();
+			if ( itr.hasNext() ) {
+				// get the next line from the same file
+				e = itr.next();
+				// insert into queue
+				fQ.insert(e);
+			}
 			
 			// While queue !isEmpty()
 			while (!fQ.isEmpty()) {
-				FileLine e = fQ.removeMin();
+				e = fQ.removeMin();
 				// compare to key associated with r
 				String rKey = null;
 				String newKey = null;
@@ -122,7 +131,7 @@ public class Reducer {
 					r.join(e);
 				}
 				// Get the FileIterator from e so that we get the next line from e's file
-				FileIterator itr = e.getFileIterator();
+				itr = e.getFileIterator();
 				if ( itr.hasNext() ) {
 					// get the next line from the same file
 					e = itr.next();

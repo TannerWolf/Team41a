@@ -33,7 +33,7 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		// 
 		while (parent < numItems){
 			int child = parent*2;
-			if (a[child+1] != null) {
+			if (child < numItems && a[child+1] != null) {
 				int compare = cmp.compare(a[child], a[child +1]);//compare left child and right
 				if (compare > 0 ){
 					child += 1;//pick the right while right is smaller
