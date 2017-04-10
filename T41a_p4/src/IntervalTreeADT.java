@@ -49,7 +49,7 @@ public interface IntervalTreeADT<T extends Comparable<T>> {
 	 * 
 	 * <p>Note: the key for comparison here will be the compareTo method defined
 	 *  in interval class. You will use this for the interval stored in the node to
-	 *  compare it with the input interval.s</p>
+	 *  compare it with the input interval.</p>
 	 * 
 	 * <p>If the start and end of the given interval match an existing 
 	 * interval, throw an IllegalArgumentException.</p>
@@ -149,8 +149,8 @@ public interface IntervalTreeADT<T extends Comparable<T>> {
 	 * <ol>
 	 * <li>if node is null, return</li>
 	 * <li>if node interval overlaps with the given input interval, add it to the result.</li>
-	 * <li>if left subtree's max is greater than the interval's start, call findOverlappingHelper in the left subtree.</li>
-	 * <li>if right subtree's max is greater than the interval's start, call call findOverlappingHelper in the rightSubtree.</li>
+	 * <li>if left subtree's max is greater than or equal to the interval's start, call findOverlappingHelper in the left subtree.</li>
+	 * <li>if right subtree's max is greater than or equal to the interval's start, call call findOverlappingHelper in the rightSubtree.</li>
 	 * </ol>
 	 *  
 	 * @param interval the interval to search for overlapping
