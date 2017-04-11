@@ -1,16 +1,26 @@
+/////////////////////////////////////////////////////////////////////////////
+// Semester:         CS367 Spring 2017
+// PROJECT:          p4
+// FILE:             IntervalTree
+//
+// TEAM:    Team 41a
+// Authors: 
+// Author1: (Jiayue Lai, jlai28@wisc.edu, jlai, Lec 002)
+// Author2: (William Mustari, willmustari@gmail.com, mustari, Lec 002) 
+// Author3: (Tanner Wolf, tmwolf2@wisc.edu, tmwolf2, Lec 002) 
+///////////////////////////////////////////////////////////////////////////////
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T> {
 	
-	// TODO declare any data members needed for this class
+	private IntervalNode<T> root = null;
 	private int size = 0;					// not sure if we need these but they might be helpful - T
-	private IntervalNode<T> root = null; 		// 
-
+	
 	@Override
 	public IntervalNode<T> getRoot() {
-		// TODO Auto-generated method stub
-		return root;
+		return this.root;
 	}
 
 	@Override
@@ -71,8 +81,7 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
-		// recursively count?
+		//Calls helper method
 		return getHeight(root);
 	}
 	
@@ -86,6 +95,10 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 		int leftH = 1;
 		int rightH = 1;
 		
+		//If root node is null, height is zero.
+        if (node == null)
+            return 0;
+	
 		// Recursion to find height
 		if (node.getLeftNode() != null)
 			leftH = 1 + getHeight(node.getLeftNode());
@@ -107,8 +120,9 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 
 	@Override
 	public void printStats() {
-		// TODO Auto-generated method stub
-
+		System.out.println("-----------------------------------------");
+		System.out.println("Height: " + getHeight());
+    	System.out.println("Size: " + getSize());
+		System.out.println("-----------------------------------------");
 	}
-
 }
