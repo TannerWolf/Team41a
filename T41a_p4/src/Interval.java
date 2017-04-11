@@ -35,9 +35,15 @@ public class Interval<T extends Comparable<T>> implements IntervalADT<T> {
     @Override
     public boolean overlaps(IntervalADT<T> other) {
         // TODO Auto-generated method stub
-    	
-    	
-    	
+    	if (other == null) {
+    		throw new IllegalArgumentException();
+    	}
+    	if (end.compareTo(other.getStart()) < 0) {
+    		return false;
+    	}
+    	if (start.compareTo(other.getEnd()) > 0) {
+    		return false;
+    	}
     	return true;
     }
 
