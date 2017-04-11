@@ -1,3 +1,15 @@
+/////////////////////////////////////////////////////////////////////////////
+// Semester:         CS367 Spring 2017
+// PROJECT:          p4
+// FILE:             IntervalNode
+//
+// TEAM:    Team 41a
+// Authors: 
+// Author1: (Jiayue Lai, jlai28@wisc.edu, jlai, Lec 002)
+// Author2: (William Mustari, willmustari@gmail.com, mustari, Lec 002) 
+// Author3: (Tanner Wolf, tmwolf2@wisc.edu, tmwolf2, Lec 002) 
+///////////////////////////////////////////////////////////////////////////////
+
 /**
  * This class defines the IntervalNode for the IntervalTree. This node has three
  * components: 1) interval - the data that we want to store in this node 2)
