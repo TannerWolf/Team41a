@@ -28,41 +28,29 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 		if (interval == null)
 			throw new IllegalArgumentException();
 		
-		insert(root, interval);
+		//Calls helper method
+		root = insert(root, interval);
 	}
 	
-	private IntervalNode<T> insert(IntervalNode<T> T, IntervalADT<T> interval){
-		//If the tree is empty,create a new one
-		if (root == null) {
-			root = new IntervalNode<T>(interval);
-			return root;
+	private IntervalNode<T> insert(IntervalNode<T> node, IntervalADT<T> interval){
+		//If the tree is empty, create a new node
+		if (node == null) {
+			node = new IntervalNode<T>(interval);
+			return node;
 		}
 		
-		//If interval's start is different and is smaller, add to left sub tree
-		//recursively trace 
-		if (interval.getStart().compareTo(root.getInterval().getStart()) < 0){
-			root.setLeftNode(insert(root.getLeftNode(), interval));	
+		//If interval is smaller, add to left sub tree
+		else if (interval.compareTo(node.getInterval()) < 0){
+			node.setLeftNode(insert(node.getLeftNode(), interval));
 		}
 		
-		//Insert it into T's right subtree if it's start is 
-		//different and larger than that of T
-		if ((interval.getStart().compareTo(T.getInterval().getStart()) > 0)){
-			root.setRightNode(insert(root.getLeftNode(), interval));	
+		//If interval is larger, add to right sub tree
+		else if ((interval.compareTo(node.getInterval()) > 0)){
+			node.setRightNode(insert(node.getRightNode(), interval));	
 		}
 		
-		//If interval's start is equal to that of T, than compare its end
-		else if (interval.getEnd().compareTo(T.getInterval().getEnd()) < 0){
-			root.setLeftNode(insert(root.getLeftNode(), interval));
-		}
-		
-		//Insert it into T's right subtree if it's start is 
-		//different and larger than that of T
-		else if ((interval.getEnd().compareTo(T.getInterval().getEnd()) > 0)){
-			root.setRightNode(insert(root.getLeftNode(), interval));
-		}
-		
-		//return the unchanged node pointer
-		return root;
+		//Return the unchanged node pointer
+		return node;
 	}
 
 	@Override
@@ -130,24 +118,22 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 	 * @return max height of tree
 	 */
 	private int getHeight(IntervalNode<T> node) {
-		int leftH = 1;
-		int rightH = 1;
-		
-		//If root node is null, height is zero.
-        if (node == null)
-            return 0;
-	
+		int leftHeight = 0;
+		int rightHeight = 0;
+
 		// Recursion to find height
 		if (node.getLeftNode() != null)
-			leftH = 1 + getHeight(node.getLeftNode());
-		if (node.getRightNode() == null)
-			rightH = 1 + getHeight(node.getRightNode());
+			leftHeight = getHeight(node.getLeftNode());
+		if (node.getRightNode() != null)
+			rightHeight = getHeight(node.getRightNode());
 		
-		// return max: if one is null, height remains 1
-		if (leftH > rightH) {
-			return leftH;
+		// Returns max: if one is null, height remains 1
+		if (leftHeight > rightHeight) {
+			return leftHeight+1;
 		}
-		return rightH;
+		else{
+			return rightHeight+1;
+		}
 	}
 
 	@Override
