@@ -13,13 +13,12 @@
 
 public class Interval<T extends Comparable<T>> implements IntervalADT<T> {
 
-    // TODO declare any needed data members
 	private T start;
 	private T end;
 	private String label;
 
     public Interval(T start, T end, String label) {
-        // TODO check if end < start??
+        // check if end is less than start
     	if (end.compareTo(start) < 0) {
     		throw new IllegalArgumentException();
     	}
@@ -61,7 +60,8 @@ public class Interval<T extends Comparable<T>> implements IntervalADT<T> {
 
     @Override
     public boolean contains(T point) {
-        // check if the point is greater than or equal to the start and less than or equal to the end
+        // check if the point is greater than or equal to the start 
+    	// and less than or equal to the end
     	return (start.compareTo(point) <= 0 && point.compareTo(end) <= 0 );
     }
 
@@ -80,6 +80,5 @@ public class Interval<T extends Comparable<T>> implements IntervalADT<T> {
 	public String toString() {
     	// return String form in form of: label [start, end]
     	return label + " [" + start.toString() + ", " + end.toString() + "]";
-    }
-    
+    }   
 }

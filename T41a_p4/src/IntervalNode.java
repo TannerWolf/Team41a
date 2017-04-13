@@ -22,15 +22,14 @@
  * @param <T>
  *            the template parameter for the data field - interval.
  */
-
 public class IntervalNode<T extends Comparable<T>> {
-	// Interval stored in the node.
+	// Interval stored in the node
 	private IntervalADT<T> interval;
 
-	// Each node stores the maxEnd of the interval in its subtree.
+	// Each node stores the maxEnd of the interval in its subtree
 	private T maxEnd;
 
-	// LeftNode and RightNode.
+	// LeftNode and RightNode
 	private IntervalNode<T> leftNode, rightNode;
 
 	/**
@@ -56,11 +55,11 @@ public class IntervalNode<T extends Comparable<T>> {
 	 * @return in-order successor node
 	 */
 	public IntervalNode<T> getSuccessor() {
-		//If right node is null, return null.
+		//If right node is null, return null
 		if(getRightNode() == null){
 			return null;
 		}
-		//Returns left-most node in the right subtree.
+		//Returns left-most node in the right subtree
 		IntervalNode<T> current = getRightNode();
 		while (current.getLeftNode() != null) {
 			current = current.getLeftNode();
