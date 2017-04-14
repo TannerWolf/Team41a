@@ -15,7 +15,7 @@ import java.util.List;
 
 public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T> {
 	
-	private IntervalNode<T> root = null;
+	private IntervalNode<T> root;
 
 	/*
 	 * Constructor
@@ -24,6 +24,10 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 		this.root = root;
 	}
 	
+	public IntervalTree() {
+		root = null;
+	}
+
 	@Override
 	public IntervalNode<T> getRoot() {
 		return this.root;
