@@ -50,6 +50,9 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 			node.setRightNode(insert(node.getRightNode(), interval));	
 		}
 		
+		// Update max end
+		node.setMaxEnd(recalculateMaxEnd(node));
+		
 		//Return the unchanged node pointer
 		return node;
 	}
@@ -93,12 +96,22 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 		return node;
 	}
 
+	/**
+	 * Check if the max end has changed and update it
+	 * 
+	 * @param node
+	 * @return
+	 */
 	 private T recalculateMaxEnd(IntervalNode<T> node){
-		 if (node.getRightNode()== null)
-			 return node.getMaxEnd();
-		
-		 else //if (node.getMaxEnd().compareTo(node.getRightNode().getMaxEnd()) < 0)
+		 T max = node.getMaxEnd();
+		 if (node.getRightNode()== null && node.getLeftNode() != null) {
+				max = node.getMaxEnd();
+		 }
+		 if (node.getRightNode()==null) { // && leftNode != null
 			 return node.getLeftNode().getMaxEnd();
+		 }
+		 
+		 return max;
 	 }
 
 	@Override
