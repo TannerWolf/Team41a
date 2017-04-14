@@ -17,6 +17,13 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 	
 	private IntervalNode<T> root = null;
 
+	/*
+	 * Constructor
+	 */
+	public IntervalTree(IntervalNode<T> root){
+		this.root = root;
+	}
+	
 	@Override
 	public IntervalNode<T> getRoot() {
 		return this.root;
