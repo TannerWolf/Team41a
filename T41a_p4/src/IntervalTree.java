@@ -30,7 +30,6 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 
 		// Calls helper method
 		root = insert(root, interval);
-		// TODO call recalculateMaxEnd here??
 	}
 
 	private IntervalNode<T> insert(IntervalNode<T> node, IntervalADT<T> interval) {
@@ -149,38 +148,71 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 
 	@Override
 	public List<IntervalADT<T>> findOverlapping(IntervalADT<T> interval) {
-		// TODO MAY NEED SOME HELP
-		// return findOverlappingHelper(root, interval, *list?*);
-		return null; // TEMPORARY
+		
+		// Instantiate list, call helper, and return the result
+		List<IntervalADT<T>> list = new LinkedList<IntervalADT<T>>();
+		findOverlappingHelper(root, interval, list);
+		return list;
 	}
 
-	// private void findOverlappingHelper(IntervalNode<T> node,
-	// IntervalADT<T> interval, List<IntervalADT<T>> result){
-	// // TODO MAY NEED SOME HELP
-	// return;
-	// }
+	/**
+	 * Helper method for findOverlapping
+	 * 
+	 * @param node
+	 * 			current node checking
+	 * @param interval
+	 * 			target comparison interval
+	 * @param result
+	 * 			list of intervals that overlap with given interval
+	 */
+	private void findOverlappingHelper(IntervalNode<T> node, IntervalADT<T> interval, List<IntervalADT<T>> result) {
+
+		// check if node is null
+		if (node == null) {
+			return;
+		}
+		//check if node overlaps
+		if (node.getInterval().overlaps(interval)) {
+			result.add(node.getInterval());
+		}
+		// check children recursively
+		if (node.getLeftNode()!=null && node.getLeftNode().getMaxEnd().compareTo(interval.getStart()) >= 0) {
+			findOverlappingHelper(node.getLeftNode(), interval, result);
+		}
+		if (node.getRightNode()!=null && node.getRightNode().getMaxEnd().compareTo(interval.getStart()) >= 0) {
+			findOverlappingHelper(node.getRightNode(), interval, result);
+		}
+	}
 
 	@Override
 	public List<IntervalADT<T>> searchPoint(T point) {
 		if (point == null)
 			throw new IllegalArgumentException();
 
-		// TODO MAY NEED SOME HELP
-		if (point.compareTo(root.getInterval().getStart()) == 0) {
-
-		}
-
-		if (point.compareTo(root.getInterval().getStart()) < 0) {
-
-		}
-
-		if (point.compareTo(root.getInterval().getStart()) > 0) {
-
-		}
-
 		List<IntervalADT<T>> list = new LinkedList<IntervalADT<T>>();
-
+		searchPointHelper(point,root,list);
 		return list;
+	}
+	
+	/**
+	 * Helper method for searchPoint to recursively check the tree
+	 * 
+	 * @param point
+	 * @param node
+	 */
+	private void searchPointHelper(T point, IntervalNode<T> node, List<IntervalADT<T>> list) {
+		if (node == null) {
+			return;
+		}
+		if (node.getInterval().contains(point)) {
+			list.add(node.getInterval());
+		}
+		if (node.getLeftNode()!=null && point.compareTo(node.getLeftNode().getMaxEnd()) <= 0) {
+			searchPointHelper(point, node.getLeftNode(), list);
+		}
+		if (node.getRightNode()!=null && point.compareTo(node.getRightNode().getMaxEnd()) <= 0) {
+			searchPointHelper(point, node.getRightNode(), list);
+		}
 	}
 
 	@Override
