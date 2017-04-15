@@ -67,23 +67,33 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 			throw new IntervalNotFoundException(
 					interval.getLabel() + " [" + interval.getStart() + ", " + interval.getEnd() + "]");
 		// Calls helper method
-		deleteHelper(root, interval);
-		// TODO call recalculateMaxEnd here?
+		root = deleteHelper(root, interval);
 	}
 
 	@Override
 	public IntervalNode<T> deleteHelper(IntervalNode<T> node, IntervalADT<T> interval) {
 		// TODO Insert comments
+		
+		
+		
 		if (interval.compareTo(node.getInterval()) == 0) {
+			// no children
 			if (node.getLeftNode() == null && node.getRightNode() == null) {
 				return null;
 			}
+			// 1 child
 			if (node.getLeftNode() == null) {
 				return node.getRightNode();
 			}
-			if (node.getRightNode() == null) {
+			else if (node.getRightNode() == null) {
 				return node.getLeftNode();
 			}
+			// 2 children -- both non-null
+			else {
+				node.setInterval(node.getSuccessor().getInterval());
+				deleteHelper(node.getRightNode(), node.getInterval());
+			}
+			
 		}
 
 		else if (interval.compareTo(node.getInterval()) < 0) {
