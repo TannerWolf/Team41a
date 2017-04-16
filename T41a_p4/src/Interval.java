@@ -13,9 +13,9 @@
 
 public class Interval<T extends Comparable<T>> implements IntervalADT<T> {
 
-	private T start;
-	private T end;
-	private String label;
+	private T start;	// start of the interval
+	private T end;		// interval end
+	private String label;	// label
 
     public Interval(T start, T end, String label) {
         // check if end is less than start
@@ -45,7 +45,7 @@ public class Interval<T extends Comparable<T>> implements IntervalADT<T> {
 
     @Override
     public boolean overlaps(IntervalADT<T> other) {
-        // TODO Auto-generated method stub
+        // check if null, otherwise compare the starts and ends to see if they overlap
     	if (other == null) {
     		throw new IllegalArgumentException();
     	}
