@@ -68,6 +68,7 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 					interval.getLabel() + " [" + interval.getStart() + ", " + interval.getEnd() + "]");
 		// Calls helper method
 		root = deleteHelper(root, interval);
+		
 	}
 
 	@Override
@@ -91,6 +92,7 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 			// 2 children -- both non-null
 			else {
 				node.setInterval(node.getSuccessor().getInterval());
+				node.setMaxEnd(node.getInterval().getEnd());
 				deleteHelper(node.getRightNode(), node.getInterval());
 			}
 			
